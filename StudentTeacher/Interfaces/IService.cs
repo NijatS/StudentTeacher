@@ -17,5 +17,6 @@ namespace StudentTeacher.Interfaces
 
         public void Delete();
 
+        public void Update();
     }
 }

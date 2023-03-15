@@ -9,7 +9,7 @@ using StudentTeacher.Extentions;
 
 namespace StudentTeacher.Services
 {
-    internal class StudentService :IService
+    internal class StudentService :IService,IStudentService 
     {
         Student[] students = { };
         public void Create()
@@ -93,6 +93,49 @@ namespace StudentTeacher.Services
                 }
             }
             else { Console.WriteLine("Student List is empty.Please Add Student..."); }
+        }
+
+        public void Update()
+        {
+            if (students.Length > 0)
+            {
+                Console.Write("Please enter ID : ");
+                int id = int.Parse(Console.ReadLine());
+                foreach (Student student in students)
+                {
+                    if (id == student.Id)
+                    {
+                        int index = Array.IndexOf(students, student);
+                        Console.Write("Student Name : ");
+                        string name = Console.ReadLine();
+                        Console.Write("Student Surname : ");
+                        string surname = Console.ReadLine();
+                        Console.Write("Group No : ");
+                        string groupNo = Console.ReadLine();
+
+                        while (!name.CheckName() || !surname.CheckName() || string.IsNullOrWhiteSpace(groupNo))
+                        {
+                            Console.WriteLine("Again!!!");
+                            Console.Write("Student Name : ");
+                            name = Console.ReadLine();
+                            Console.Write("Student Surname : ");
+                            surname = Console.ReadLine();
+                            Console.Write("Group No : ");
+                            groupNo = Console.ReadLine();
+                        }
+                        student.Surname = surname;
+                        student.Name = name;
+                        student.GroupNo = groupNo;
+
+                        return;
+                    }
+                }
+                Console.WriteLine("Not Finding...");
+            }
+            else
+            {
+                Console.WriteLine("Student List is empty.Please Add Student...");
+            }
         }
     }
 }

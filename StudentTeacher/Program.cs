@@ -21,33 +21,38 @@ while (status1)
                 Console.WriteLine("1.Create Student\n" +
                     "2.Show Students\n" +
                     "3.Search by ID\n" +
-                    "4.Remove\n" +
-                    "5.Clear Console\n" +
+                    "4.Update by ID\n" +
+                    "5.Remove\n" +
+                    "6.Clear Console\n" +
                     "q Quit Student Login");
                 Console.Write("Step: ");
                 string step2 = Console.ReadLine();
-                switch (step2) {
+                switch (step2)
+                {
                     case "1":
                         studentService.Create();
                         break;
-                        case "2":
+                    case "2":
                         studentService.Show();
                         break;
-                        case "3":
+                    case "3":
                         studentService.GetById();
                         break;
-                        case "4":
+                    case "4":
+                        studentService.Update();
+                        break;
+                    case "5":
                         studentService.Delete();
                         break;
-                        case "5":
+                    case "6":
                         Console.Clear();
                         break;
-                        case "q":
+                    case "q":
                         Console.WriteLine("Exiting...");
                         status2 = false;
                         break;
                 }
-               
+
             }
             status2 = true;
             break;
@@ -57,8 +62,9 @@ while (status1)
                 Console.WriteLine("1.Create Teacher\n" +
                     "2.Show Teachers\n" +
                     "3.Search by ID\n" +
-                    "4.Remove\n" +
-                    "5.Console Clear\n" +
+                    "4.Update by ID\n" +
+                    "5.Remove\n" +
+                    "6.Console Clear\n" +
                     "q Quit Teacher Login");
                 Console.Write("Step: ");
                 string step3 = Console.ReadLine();
@@ -74,9 +80,12 @@ while (status1)
                         teacherService.GetById();
                         break;
                     case "4":
-                        teacherService.Delete();
+                        teacherService.Update();
                         break;
                     case "5":
+                        teacherService.Delete();
+                        break;
+                    case "6":
                         Console.Clear();
                         break;
                     case "q":
@@ -87,7 +96,6 @@ while (status1)
             }
             status2 = true;
             break;
-
         case "q":
             Console.WriteLine("Exiting...");
             status1 = false;

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace StudentTeacher.Services
 {
-    internal class TeacherService : IService
+    internal class TeacherService : IService, ITeacherService
     {
         Teacher[] teachers = { };
         public void Create()
@@ -48,7 +48,7 @@ namespace StudentTeacher.Services
                 {
                     if (id == teacher.Id)
                     {
-                        int index = Array.IndexOf(teachers,teacher);
+                        int index = Array.IndexOf(teachers, teacher);
                         teachers = teachers.Remove(index, teachers.Length - 1);
                         Console.WriteLine("Removing was successful");
                         return;
@@ -90,6 +90,48 @@ namespace StudentTeacher.Services
                 }
             }
             else { Console.WriteLine("Teacher List is empty.Please Add Teacher..."); }
+        }
+        public void Update()
+        {
+            if (teachers.Length > 0)
+            {
+                Console.Write("Please enter ID : ");
+                int id = int.Parse(Console.ReadLine());
+                foreach (Teacher teacher in teachers)
+                {
+                    if (id == teacher.Id)
+                    {
+                        int index = Array.IndexOf(teachers, teacher);
+                        Console.Write("Teacher Name : ");
+                        string name = Console.ReadLine();
+                        Console.Write("Teacher Surname : ");
+                        string surname = Console.ReadLine();
+                        Console.Write("Group No : ");
+                        string groupNo = Console.ReadLine();
+
+                        while (!name.CheckName() || !surname.CheckName() || string.IsNullOrWhiteSpace(groupNo))
+                        {
+                            Console.WriteLine("Again!!!");
+                            Console.Write("Teacher Name : ");
+                            name = Console.ReadLine();
+                            Console.Write("Teacher Surname : ");
+                            surname = Console.ReadLine();
+                            Console.Write("Group No : ");
+                            groupNo = Console.ReadLine();
+                        }
+                        teacher.Surname = surname;
+                        teacher.Name = name;
+                        teacher.GroupNo = groupNo;
+
+                        return;
+                    }
+                }
+                Console.WriteLine("Not Finding...");
+            }
+            else
+            {
+                Console.WriteLine("Teacher List is empty.Please Add Teacher...");
+            }
         }
     }
 }
